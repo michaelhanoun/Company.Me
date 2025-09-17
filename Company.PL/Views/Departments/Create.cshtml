@@ -1,0 +1,14 @@
+﻿@model DepartmentDto
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create New Department</h1>
+<br/>
+<br/>
+<form asp-action="Create">
+    <partial name="PartialViews/CreateUpdateDepartmentPartial" model="@Model" />
+    <input type="submit" value="Create" class="mt-4 btn btn-primary" />
+    <a asp-action="Index" class=" mt-4 btn btn-light" >Back To Home</a>
+</form>
+

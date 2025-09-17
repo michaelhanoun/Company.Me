@@ -1,0 +1,12 @@
+﻿@model DepartmentDto
+
+<label class="col-form-label" asp-for="@Model.Code" >Code</label>
+<input asp-for="@Model.Code" class="form-control"/>
+<span asp-validation-for="@Model.Code" class="text-danger"></span>
+<label class="col-form-label" asp-for="@Model.Name" >Name</label>
+<input asp-for="@Model.Name" class="form-control"/>
+<span asp-validation-for="@Model.Name" class="text-danger"></span>
+<label class="col-form-label" asp-for="@Model.CratedAt" >Creation Time</label>
+<input asp-for="@Model.CratedAt" class="form-control"/>
+<span asp-validation-for="@Model.CratedAt" class="text-danger"></span>
+
