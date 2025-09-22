@@ -8,7 +8,8 @@ namespace Company.PL.Helpers
     {
         public MappingProfile()
         {
-            CreateMap<DepartmentDto, Department>();
+            CreateMap<DepartmentDto, Department>().ReverseMap();
+            CreateMap<EmployeeDto, Employee>().ReverseMap();
         }
     }
 }

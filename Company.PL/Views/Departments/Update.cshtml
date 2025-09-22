@@ -1,0 +1,18 @@
+﻿@model DepartmentDto
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update</h1>
+<br />
+<br />
+
+<form asp-action="Update">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <partial name="PartialViews/CreateUpdateDepartmentPartial"/>
+    <input type="submit" value="Update" class="mt-4 btn btn-primary" />
+    <a asp-action="Index" class=" mt-4 btn btn-light">Back To Home</a>
+</form>
+@section Validation {
+    <partial name="_ValidationScriptsPartial" />
+}
