@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete Department</h1>
+<br />
+<br />
+<form asp-action="Delete">
+    <partial name="PartialViews/DetailsDeleteDepartmentPartial" />
+    <input type="submit" value="Delete" class="btn btn-danger mt-4" />
+    <a asp-action="Index" class="btn btn-light mt-4">Cancel</a>
+</form>
+

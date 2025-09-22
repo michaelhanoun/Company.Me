@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Company.BLL.Specification.Class
 {
-    public class DepartmentsSpecification : BaseSpecification<Department>
+    public class EmployeesSpecification:BaseSpecification<Employee>
     {
-        public DepartmentsSpecification(string name) : base(D => string.IsNullOrEmpty(name) || EF.Functions.Like(D.Name, $"%{name}%"))
+        public EmployeesSpecification(string name) : base(E => string.IsNullOrEmpty(name) || EF.Functions.Like(E.Name, $"%{name}%"))
         {
 
         }
-        public DepartmentsSpecification(int id) : base(D => D.Id == id)
+        public EmployeesSpecification(int id) : base( E=> E.Id == id)
         {
             {
 

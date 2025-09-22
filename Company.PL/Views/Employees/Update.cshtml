@@ -1,0 +1,17 @@
+﻿@model EmployeeDto
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update Employee</h1>
+<br />
+<br />
+<form asp-action="Update" enctype="multipart/form-data">
+    <partial name="PartialViews/CreateUpdateEmployeePartial" />
+    <input type="submit" value="Update" class="btn btn-primary mt-4" />
+    <a asp-action="Index" class="btn btn-light mt-4">Back To List</a>
+</form>
+
+@section Validation {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,56 @@
+﻿@model EmployeeDto
+@inject IUnitOfWork _unitOfWork
+@{
+    var departmentRepository = _unitOfWork.Repository<Department>();
+
+    var departments = new SelectList(await departmentRepository.GetAllDataWithSpec(new BaseSpecification<Department>()), nameof(Department.Id), nameof(Department.Name));
+}
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-group">
+    <label class="col-form-label" asp-for="Name"></label>
+    <input class="form-control" asp-for="Name" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label class="col-form-label" asp-for="Email"></label>
+    <input class="form-control" asp-for="Email" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label class="col-form-label" asp-for="Address"></label>
+    <input class="form-control" asp-for="Address" />
+    <span asp-validation-for="Address" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label class="col-form-label" asp-for="Age"></label>
+    <input class="form-control" asp-for="Age" />
+    <span asp-validation-for="Age" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label class="col-form-label" asp-for="Salary"></label>
+    <input class="form-control" asp-for="Salary" />
+    <span asp-validation-for="Salary" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label class="col-form-label" asp-for="Gender"></label>
+    <select class="form-control" asp-for="Gender" asp-items="@Html.GetEnumSelectList<Gender>()">
+        <option value="@null">-- Select Gender --</option>
+    </select>
+    <span asp-validation-for="Gender" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <input class="form-check-input " asp-for="IsActive" />
+    <label class="col-form-label p-0" asp-for="IsActive"></label>
+</div>
+<div class="form-group">
+    <label class="col-form-label" asp-for="HiringDate"></label>
+    <input class="form-control" asp-for="HiringDate" />
+    <span asp-validation-for="HiringDate" class="text-danger"></span>
+</div>
+
+    <div class="form-group">
+    <label asp-for="Department" class="col-form-label"></label>
+    <select class="form-control" asp-for="DepartmentId" asp-items="@departments">
+            <option value="@null">-- Select Department --</option>
+    </select>
+    </div>
