@@ -1,5 +1,5 @@
 ﻿var searchInp = document.getElementById("EmpSearchInp");
-let value = searchInp.value;
+if (searchInp != null)
 searchInp.addEventListener("keyup",
     function () {
        let xhr = new XMLHttpRequest();
