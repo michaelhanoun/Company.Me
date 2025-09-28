@@ -29,5 +29,7 @@ namespace Company.PL.Dtos
         public EmpType EmpType { get; set; }
         public int? DepartmentId { get; set; }
         public Department? Department { get; set; }
+        public string? ImageName { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }
