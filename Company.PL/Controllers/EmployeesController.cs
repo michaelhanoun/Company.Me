@@ -4,10 +4,12 @@ using Company.BLL.Specification.Class;
 using Company.DAL.Entites;
 using Company.PL.Dtos;
 using Company.PL.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.PL.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

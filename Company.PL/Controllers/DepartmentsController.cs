@@ -5,10 +5,12 @@ using Company.BLL.Specification.Class;
 using Company.DAL.Entites;
 using Company.PL.Dtos;
 using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.PL.Controllers
 {
+    [Authorize]
     public class DepartmentsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
