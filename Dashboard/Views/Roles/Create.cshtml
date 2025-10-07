@@ -1,0 +1,19 @@
+﻿@model RoleToCreateDto
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<br />
+<br />
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Create" class="mt-4 btn btn-primary" />
+        <a asp-action="Index" class=" mt-4 btn btn-light">Back To Home</a>
+</form>
+
