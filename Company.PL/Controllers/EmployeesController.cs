@@ -21,7 +21,6 @@ namespace Company.PL.Controllers
             _mapper = mapper;
             _env = env;
         }
-        [HttpGet]
         public async Task<IActionResult> Index(string searchInp)
         {
             return View(await _unitOfWork.Repository<Employee>().GetAllDataWithSpec(new EmployeesSpecification(searchInp)));

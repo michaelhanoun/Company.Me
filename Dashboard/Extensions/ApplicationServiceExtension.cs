@@ -3,18 +3,14 @@ using Company.BLL.Interfaces;
 using Company.BLL.Services;
 using Company.DAL.Data;
 using Company.DAL.Entites;
-using Company.PL.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
-namespace Company.PL.Extensions
+namespace Dashboard.Extensions
 {
     public static class ApplicationServiceExtension
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration) {
-            services.AddAutoMapper(M=>M.AddProfile<MappingProfile>());
             services.AddControllersWithViews();
             services.AddDbContext<CompanyDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));

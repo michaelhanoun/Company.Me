@@ -23,7 +23,6 @@ namespace Company.PL.Controllers
             _mapper = mapper;
             _env = env;
         }
-        [HttpGet]
         public async Task<IActionResult> Index(string searchInp)
         {  
            return View(await _unitOfWork.Repository<Department>().GetAllDataWithSpec(new DepartmentsSpecification(searchInp)));

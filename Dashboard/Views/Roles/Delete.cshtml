@@ -1,0 +1,17 @@
+﻿@model RoleToCreateDto
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+<br />
+<br />
+<form asp-action="Delete">
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" readonly />
+    </div>
+        <input type="submit" value="Delete" class="btn btn-danger mt-4" />
+        <a asp-action="Index" class="btn btn-light mt-4">Cancel</a>
+</form>
+
