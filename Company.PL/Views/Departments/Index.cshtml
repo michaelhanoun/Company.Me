@@ -1,55 +1,44 @@
-﻿@model  List<Department>
+﻿@model List<Department>
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All Departments";
 }
-<
-<h1>All Departments</h1>
-<br />
-<br/>
-<a asp-action="Create"asp-controller="Departments"class="btn btn-primary">Create New Department</a>
-<br/>
-<div class="row justify-content-center align-items-center mt-5">
-    <form class="row col-8 offset-2" asp-action="Index">
-        <div class="col-8">
-            <input type="text" name="searchInp" class="form-control" placeholder="Search By Name" id="DepSearchInp" />
+
+<div class="container mt-4">
+    <h1>All Departments</h1>
+    <a asp-action="Create" asp-controller="Departments" class="btn btn-primary mb-3">Create New Department</a>
+
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-8">
+            <input type="text" id="DepSearchInp" class="form-control mb-3" placeholder="Search By Name..." />
         </div>
-        <div class="col-4">
-            <input type="submit" class="btn btn-success" value="search" />
-        </div>
-    </form>
-</div>
-<br/>
-@if(@Model.Count>0)
-{
-    <table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th> Code </th>
-            <th> Name </th>
-            <th> Creation Date </th>
-            <th>Details</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var department in Model)
-            {
-              <tr>
-                  <td>@department.Code</td>
-                  <td>@department.Name</td>
-                  <td>@department.CratedAt</td>
-                    <partial name="_ButtonsPartial" model="@department.Id" />
-              </tr>  
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <div class="mt-4 alert alert-danger">
-        <h3>There is No Departments :(</h3>
     </div>
+
+    <div id="departmentsTableContainer">
+        @await Html.PartialAsync("PartialViews/_DepartmentsTablePartial", Model)
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#DepSearchInp').on('keyup', function () {
+                var searchValue = $(this).val();
+
+                $.ajax({
+                    url: '/Departments/Search', // must match controller action
+                    type: 'GET',
+                    data: { searchInp: searchValue },
+                    success: function (result) {
+                        $('#departmentsTableContainer').html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error:", xhr.responseText || error);
+                        $('#departmentsTableContainer').html('<p class="text-danger">Error loading departments.</p>');
+                    }
+                });
+            });
+        });
+    </script>
 }
-
-

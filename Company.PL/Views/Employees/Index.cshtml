@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Employee>
+﻿@* @model IEnumerable<Employee>
 @{
     ViewData["Title"] = "Index";
 }
@@ -59,4 +59,71 @@ else
         <h3>There is No Employess :(</h3>
     </div>
 }
+ *@
+@model IEnumerable<Employee>
+@{
+    ViewData["Title"] = "All Employees";
+}
 
+<h1>All Employees</h1>
+<br />
+<a asp-action="Create" class="btn btn-primary">Create New Employee</a>
+
+<div class="row justify-content-center align-items-center mt-5">
+    <form class="row col-8 offset-2" id="EmpSearchForm">
+        <div class="col-8">
+            <input type="text" name="searchInp" class="form-control" placeholder="Search By Name" id="EmpSearchInp" />
+        </div>
+        <div class="col-4">
+            <input type="submit" class="btn btn-success" value="Search" />
+        </div>
+    </form>
+</div>
+
+<!-- Employee table container -->
+<div id="employeesTable" class="mt-4">
+    @await Html.PartialAsync("PartialViews/_EmployeesTablePartial", Model)
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            // Handle typing in search box
+            $("#EmpSearchInp").on("keyup", function () {
+                var searchValue = $(this).val();
+
+                $.ajax({
+                    url: '@Url.Action("Search", "Employees")',
+                    type: 'GET',
+                    data: { searchInp: searchValue },
+                    success: function (result) {
+                        $("#employeesTable").html(result);
+                    },
+                    error: function () {
+                        alert("Error loading employees");
+                    }
+                });
+            });
+
+            // Optional: Prevent full form submit
+            $("#EmpSearchForm").on("submit", function (e) {
+                e.preventDefault();
+                var searchValue = $("#EmpSearchInp").val();
+
+                $.ajax({
+                    url: '@Url.Action("Search", "Employees")',
+                    type: 'GET',
+                    data: { searchInp: searchValue },
+                    success: function (result) {
+                        $("#employeesTable").html(result);
+                    },
+            error: function (xhr, status, error) {
+                console.error("Error:", xhr.responseText || error);
+                $('#employeesTableContainer').html('<p class="text-danger">Error loading employees.</p>');
+            }
+                });
+            });
+        });
+    </script>
+}
