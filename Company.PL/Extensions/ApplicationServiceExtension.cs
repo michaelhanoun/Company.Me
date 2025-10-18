@@ -1,5 +1,6 @@
 ﻿using Company.BLL;
 using Company.BLL.Interfaces;
+using Company.BLL.Models;
 using Company.BLL.Services;
 using Company.DAL.Data;
 using Company.DAL.Entites;
@@ -37,7 +38,16 @@ namespace Company.PL.Extensions
                 options.ExpireTimeSpan = TimeSpan.FromDays(1);
       
             });
-            services.AddScoped(typeof(IEmailSender), typeof(EmailSender));
+            services.AddScoped(typeof(IEmailSender), typeof(MailService));
+            services.Configure<MailSettings>(configuration.GetSection("EmailSettings"));
+            services.Configure<TwilioSettings>(configuration.GetSection(nameof(TwilioSettings)));
+            services.AddScoped(typeof(ITwilioService), typeof(TwilioService));
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = configuration["Authentication:Google:ClientId"];
+                options.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+
+            });
             return services;
         }
     }

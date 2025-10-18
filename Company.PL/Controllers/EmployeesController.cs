@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using Company.BLL.Interfaces;
 using Company.BLL.Specification.Class;
 using Company.DAL.Entites;
@@ -21,9 +22,16 @@ namespace Company.PL.Controllers
             _mapper = mapper;
             _env = env;
         }
+        [HttpGet]
         public async Task<IActionResult> Index(string searchInp)
         {
             return View(await _unitOfWork.Repository<Employee>().GetAllDataWithSpec(new EmployeesSpecification(searchInp)));
+        }
+        [HttpGet]
+        public async Task<IActionResult> Search(string searchInp)
+        {
+
+            return PartialView("PartialViews/_EmployeesTablePartial", await _unitOfWork.Repository<Employee>().GetAllDataWithSpec(new EmployeesSpecification(searchInp)));
         }
         [HttpGet]
         public IActionResult Create()

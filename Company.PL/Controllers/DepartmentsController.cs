@@ -28,6 +28,12 @@ namespace Company.PL.Controllers
            return View(await _unitOfWork.Repository<Department>().GetAllDataWithSpec(new DepartmentsSpecification(searchInp)));
         }
         [HttpGet]
+        public async Task<IActionResult> Search(string searchInp)
+        {
+
+                return PartialView("PartialViews/_DepartmentsTablePartial", await _unitOfWork.Repository<Department>().GetAllDataWithSpec(new DepartmentsSpecification(searchInp)));
+        }
+        [HttpGet]
         public IActionResult Create() {
             return View();            
         }
